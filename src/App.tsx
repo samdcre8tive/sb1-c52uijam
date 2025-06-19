@@ -1,37 +1,22 @@
-import React, { useState } from 'react';
-import {
-  Facebook,
-  Instagram,
-  Youtube,
-  Twitter,
-  Mail,
-  MessageSquare,
-  ExternalLink,
-  Menu,
-  X,
-} from 'lucide-react';
-import { BehanceLogo } from './components/BehanceLogo';
-import { LinkedInLogo } from './components/LinkedInLogo';
-import { WhatsAppButton } from './components/WhatsAppButton';
-import { NavBar } from './components/NavBar';
-import { Hero } from './components/Hero';
-import { Services } from './components/Services';
-import { MicrosoftSection } from './components/MicrosoftSection';
-import { Contact } from './components/Contact';
-import { Footer } from './components/Footer';
+import React from 'react';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import About from './components/About';
+import Services from './components/Services';
+import Portfolio from './components/Portfolio';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
+import WhatsAppButton from './components/WhatsAppButton';
 
 function App() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   return (
     <div className="min-h-screen bg-white">
-      <NavBar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-      <main>
-        <Hero />
-        <Services />
-        <MicrosoftSection />
-        <Contact />
-      </main>
+      <Navbar />
+      <Hero />
+      <About />
+      <Services />
+      <Portfolio />
+      <Contact />
       <Footer />
       <WhatsAppButton />
     </div>

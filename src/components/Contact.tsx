@@ -1,84 +1,150 @@
 import React, { useState } from 'react';
 import { Mail, Phone } from 'lucide-react';
 
-export function Contact() {
+const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    message: '',
+    message: ''
   });
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    window.location.href = `mailto:samuelaku32@gmail.com?subject=Contact from ${formData.name}&body=${formData.message}`;
+    // Handle form submission here
+    setShowConfirmation(true);
     setFormData({ name: '', email: '', message: '' });
-    alert('Thanks for your message, we will get back to you shortly.');
+    
+    // Hide confirmation after 3 seconds
+    setTimeout(() => {
+      setShowConfirmation(false);
+    }, 3000);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
   };
 
   return (
-    <section id="contact" className="py-16 md:py-24 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#232464] mb-2">
-            Get in touch
-          </h2>
-          <p className="text-xl text-gray-600">Let's discuss your next project</p>
+    <section id="contact" className="section-padding bg-white">
+      <div className="container-max">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">Get In Touch</h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Ready to transform your ideas into reality? Let's start a conversation.
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12">
-          <div>
-            <div className="mb-8">
-              <div className="flex items-center mb-4">
-                <Mail className="h-6 w-6 text-[#f48515] mr-2" />
-                <span className="text-gray-600">samuelaku32@gmail.com</span>
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* Contact Form */}
+          <div className="bg-gray-50 p-8 rounded-2xl">
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">Send us a message</h3>
+            
+            {showConfirmation && (
+              <div className="mb-6 p-4 bg-green-100 text-green-700 rounded-lg">
+                Thanks for reaching out! We'll get back to you shortly.
               </div>
-              <div className="flex items-center">
-                <Phone className="h-6 w-6 text-[#f48515] mr-2" />
-                <span className="text-gray-600">+2348065353480</span>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent transition-colors"
+                />
               </div>
-            </div>
+
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent transition-colors"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows={5}
+                  required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent transition-colors resize-none"
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full btn-primary"
+              >
+                Send Message
+              </button>
+            </form>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Contact Information */}
+          <div className="space-y-8">
             <div>
-              <input
-                type="text"
-                placeholder="Your Name"
-                required
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#232464]"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              />
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Contact Information</h3>
+              <div className="space-y-6">
+                <div className="flex items-center space-x-4">
+                  <div className="bg-accent p-3 rounded-full">
+                    <Mail className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Email</h4>
+                    <p className="text-gray-600">cre8tiverse@gmail.com</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-4">
+                  <div className="bg-accent p-3 rounded-full">
+                    <Phone className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Phone</h4>
+                    <p className="text-gray-600">Please confirm phone number</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div>
-              <input
-                type="email"
-                placeholder="Your Email"
-                required
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#232464]"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              />
+
+            <div className="bg-primary p-8 rounded-2xl text-white">
+              <h4 className="text-xl font-bold mb-4">Ready to get started?</h4>
+              <p className="mb-6">
+                Join thousands of creatives who have transformed their ideas into reality with Cre8tiverse.
+              </p>
+              <button className="bg-white text-primary font-semibold py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors">
+                Start Your Journey
+              </button>
             </div>
-            <div>
-              <textarea
-                placeholder="Your Message"
-                required
-                rows={4}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#232464]"
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              ></textarea>
-            </div>
-            <button
-              type="submit"
-              className="w-full px-6 py-3 bg-[#232464] text-white rounded-full hover:bg-[#f48515] transition-colors duration-200"
-            >
-              Send Message
-            </button>
-          </form>
+          </div>
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default Contact;

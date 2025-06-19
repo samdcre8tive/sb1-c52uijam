@@ -1,15 +1,18 @@
 import React from 'react';
-import { MessageSquare } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 
-export function WhatsAppButton() {
+const WhatsAppButton = () => {
   return (
     <a
-      href="https://wa.link/wsdr2g"
+      href="https://wa.link/bhsgxt"
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-8 right-8 z-50 p-4 bg-green-500 hover:bg-[#232464] text-white rounded-full shadow-lg transition-colors duration-200"
+      className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-orange-500 text-white p-4 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 hover:shadow-xl animate-float"
+      aria-label="Contact us on WhatsApp"
     >
-      <MessageSquare className="h-6 w-6" />
+      <FaWhatsapp size={32} />
     </a>
   );
-}
+};
+
+export default WhatsAppButton;
